@@ -2,18 +2,14 @@ package com.devskiller.tasks.blog.service;
 
 import com.devskiller.tasks.blog.model.Comment;
 import com.devskiller.tasks.blog.model.Post;
+import com.devskiller.tasks.blog.model.dto.CommentDto;
+import com.devskiller.tasks.blog.model.dto.NewCommentDto;
 import com.devskiller.tasks.blog.repository.CommentRepository;
 import com.devskiller.tasks.blog.repository.PostRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
-
-import com.devskiller.tasks.blog.model.dto.CommentDto;
-import com.devskiller.tasks.blog.model.dto.NewCommentDto;
 
 @Service
 public class CommentService {
@@ -57,6 +53,7 @@ public class CommentService {
 	 * @throws IllegalArgumentException if postId is null or there is no blog post for passed postId
 	 */
 	public Long addComment(Long postId, NewCommentDto newCommentDto) {
+
 		Post post = postRepository.findById(postId)
 			.orElse(null);
 
@@ -64,6 +61,7 @@ public class CommentService {
 			throw new IllegalArgumentException("Post with provided ID doesn't exists");
 		}
 
+		//I prefer to use builder, but we can create the object via constructor as well
 		Comment comment = Comment.builder()
 			.content(newCommentDto.content())
 			.author(newCommentDto.author())

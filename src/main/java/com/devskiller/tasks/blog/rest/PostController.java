@@ -40,7 +40,7 @@ public class PostController {
 
 	@PostMapping(value = "/{id}/comments")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void addComment (@PathVariable Long id, @RequestBody NewCommentDto newCommentDto) {
+	public void addComment(@PathVariable Long id, @RequestBody NewCommentDto newCommentDto) {
 		commentService.addComment(id, newCommentDto);
 	}
 
@@ -49,9 +49,10 @@ public class PostController {
 		return commentService.getCommentsForPost(id);
 	}
 
+	//using exception handler to follow project conventions. We can return responseEntity<?> to avoid this method
 	@ExceptionHandler(IllegalArgumentException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public String handleIllegalArgumentException (IllegalArgumentException ex) {
+	public String handleIllegalArgumentException(IllegalArgumentException ex) {
 		return ex.getMessage();
 	}
 
