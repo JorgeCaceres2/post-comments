@@ -1,9 +1,8 @@
 package com.devskiller.tasks.blog.service;
 
-import org.springframework.stereotype.Service;
-
 import com.devskiller.tasks.blog.model.dto.PostDto;
 import com.devskiller.tasks.blog.repository.PostRepository;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PostService {
